@@ -1,4 +1,4 @@
-https://apify.com/johnvc/apifyduckduckgo?fpr=9n7kx3
+ https://apify.com/johnvc/DuckDuckGoSEOScraper?fpr=9n7kx3
 
 # 🚀 DuckDuckGo Search Scraper
 
