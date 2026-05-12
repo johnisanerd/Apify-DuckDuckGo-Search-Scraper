@@ -1,0 +1,16 @@
+# uv
+.venv/
+
+# environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store

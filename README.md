@@ -58,6 +58,96 @@ export APIFY_API_TOKEN="your_api_key_here"
 python duckduckgo-search-scraper.py
 ```
 
+## Using with MCP
+
+This scraper is the Apify Actor **[johnvc/DuckDuckGoSEOScraper](https://apify.com/johnvc/DuckDuckGoSEOScraper?fpr=9n7kx3)**. For AI assistants, Apify hosts an MCP server where you can **preload only this Actor** so the tool list stays small.
+
+### Install via the Apify MCP configurator (use this link)
+
+Everything below is also spelled out interactively on Apify’s MCP setup page for this Actor — **pick your app under “Client setup”** and follow that tab’s steps (each client has its own flow: connectors, JSON paths, CLI, IDE files, etc.).
+
+**[https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper](https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper)**
+
+On that page you get:
+
+| Section | What it’s for |
+|--------|----------------|
+| **MCP server URL** | Copy/paste connection URL for agents that ask for a server URL. |
+| **Client setup** | Tabbed instructions per client — **Claude Desktop**, **Claude.ai**, **Claude Code**, plus **Cursor**, **VS Code**, **ChatGPT**, **Codex CLI**, **Antigravity**, **Kiro**, and others under “More”. |
+
+**Auth:** use **[OAuth](https://docs.apify.com/platform/integrations/mcp)** in the browser when offered, or your **[Apify API token](https://console.apify.com/settings/integrations)** (same kind of secret as `APIFY_API_TOKEN` in this repo). The configurator lets you choose token vs OAuth where applicable.
+
+**Canonical MCP URL for this Actor:**
+
+```text
+https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper
+```
+
+### What the configurator shows (examples)
+
+These mirror [the page above](https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper); use the live tabs for full detail.
+
+**Claude.ai**
+
+1. **Customize → Connectors → Browse connectors**, search for **Apify MCP server**, install, enable/update if prompted.
+2. When connecting, use your API token and enabled tools: `johnvc/DuckDuckGoSEOScraper`.
+3. In chat: **+ → Connectors →** turn on **Apify**.
+4. Alternatively: **Add custom connector** with the full MCP URL and OAuth — see the Claude.ai tab on the configurator.
+
+**Claude Desktop**
+
+1. **Settings → Developer → Edit Config** and edit `claude_desktop_config.json`:
+   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+2. Optional: add Apify API token in the UI; if you skip it, **OAuth** is used by default.
+3. Example remote config (same pattern as the configurator — `mcp-remote` + your Actor-specific URL):
+
+```json
+{
+  "mcpServers": {
+    "apify": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper"
+      ]
+    }
+  }
+}
+```
+
+More help: [Claude Desktop + Apify](https://docs.apify.com/platform/integrations/claude-desktop).
+
+**Cursor, Claude Code, VS Code, ChatGPT, Codex CLI, …**
+
+Open the **[same configurator link](https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper)**, select the **Client setup** tab for your tool, and copy the steps there (for example Cursor `.cursor/mcp.json`, or Claude Code `claude mcp add --transport http …`). Reference docs: [Apify MCP](https://docs.apify.com/platform/integrations/mcp) · [Claude Code MCP](https://code.claude.com/docs/en/mcp).
+
+### Quick reference (optional)
+
+**Cursor** — project `.cursor/mcp.json`, `url` set to the canonical MCP URL above; add `headers.Authorization: Bearer …` if you use token auth instead of OAuth.
+
+**Claude Code**
+
+```bash
+claude mcp add --transport http apify \
+  "https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper"
+```
+
+With token:
+
+```bash
+claude mcp add --transport http apify \
+  "https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper" \
+  --header "Authorization: Bearer YOUR_APIFY_TOKEN"
+```
+
+Then run `claude mcp list` or `/mcp` in-session.
+
+### Running this scraper from chat
+
+Use inputs like [Usage Examples](#usage-examples) (`query`, `localization`, `safe`, `date_filter`, `max_pages`, …). The sample script uses Actor ID `drYfVwbtEdPqbFkiC`; on MCP the Store id is `johnvc/DuckDuckGoSEOScraper`.
+
 
 
 # 🌟 Why Choose This Scraper?
