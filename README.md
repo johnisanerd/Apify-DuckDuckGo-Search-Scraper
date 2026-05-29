@@ -1,106 +1,199 @@
- https://apify.com/johnvc/DuckDuckGoSEOScraper?fpr=9n7kx3
+# 🦆 DuckDuckGo API: Structured DuckDuckGo Search Results in Clean JSON
 
-# 🚀 DuckDuckGo Search Scraper
+> The most efficient, reliable, and developer-friendly way to use the DuckDuckGo API.
 
-> **The most efficient, reliable, and developer-friendly DuckDuckGo search scraper**
+**Actor page:** [apify.com/johnvc/DuckDuckGoSEOScraper](https://apify.com/johnvc/DuckDuckGoSEOScraper?fpr=9n7kx3)
+**Input schema:** [apify.com/johnvc/DuckDuckGoSEOScraper/input-schema](https://apify.com/johnvc/DuckDuckGoSEOScraper/input-schema?fpr=9n7kx3)
 
-## 🚀 Quick Start
+The DuckDuckGo API runs a DuckDuckGo search for any query and returns clean, structured JSON. Each page of results comes back as one item with organic listings (title, link, snippet, position, sitelinks), ads, knowledge graph panels, news results, inline images, inline videos, and related searches, plus per-page metadata. It supports 40+ region and language combinations, safe-search levels, date filtering, and automatic pagination. Because DuckDuckGo does not personalize results, the output is consistent across runs.
+
+## Video Walkthrough
+
+[![Watch the walkthrough](https://img.youtube.com/vi/jREWahDGhJM/maxresdefault.jpg)](https://www.youtube.com/watch?v=jREWahDGhJM)
+
+## Quick Start
 
 ### Prerequisites
-- Python 3.7 or higher
-- An Apify account and API key
-
-### Setup Instructions
+- Python 3.11 or higher
+- An Apify account and API key ([get a free key here](https://apify.com?fpr=9n7kx3))
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/johnvc/Apify-DuckDuckGo-Search-Scraper.git
+   git clone https://github.com/johnisanerd/Apify-DuckDuckGo-Search-Scraper.git
    cd Apify-DuckDuckGo-Search-Scraper
    ```
 
-2. **Create a virtual environment (recommended)**
+2. **Install dependencies with UV**
    ```bash
-   # Using venv (Python 3.3+)
-   python -m venv venv
-   
-   # Activate the virtual environment
-   # On macOS/Linux:
-   source venv/bin/activate
-   # On Windows:
-   venv\Scripts\activate
+   # Install UV if you do not have it:
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+
+   # Install project dependencies:
+   uv sync
    ```
 
-3. **Install dependencies**
+3. **Configure your API key**
    ```bash
-   # Install from requirements.txt
-   pip install -r requirements.txt
-
-   ```
-
-4. **Configure your API key**
-   ```bash
-   # Copy the example environment file
    cp .env.example .env
-   
    # Edit .env and add your Apify API key
-   # Get your API key from: https://apify.com?fpr=9n7kx3
+   # Get your free API key at: https://apify.com?fpr=9n7kx3
    ```
 
-5. **Run the example**
+4. **Run the example**
    ```bash
-   python duckduckgo-search-scraper.py
+   uv run python duckduckgo-search-scraper.py
    ```
 
-### Alternative: Direct API Key Usage
-If you prefer not to use a `.env` file, you can set the environment variable directly:
+### Alternative: set the API key directly
 ```bash
 export APIFY_API_TOKEN="your_api_key_here"
-python duckduckgo-search-scraper.py
+uv run python duckduckgo-search-scraper.py
 ```
 
-## Using with MCP
+## Why Use This DuckDuckGo API?
 
-This scraper is the Apify Actor **[johnvc/DuckDuckGoSEOScraper](https://apify.com/johnvc/DuckDuckGoSEOScraper?fpr=9n7kx3)**. For AI assistants, Apify hosts an MCP server where you can **preload only this Actor** so the tool list stays small.
+**Full results-page coverage.** One call returns the whole DuckDuckGo results page as structured data: organic listings, ads, knowledge graph panels, news, inline images, inline videos, and related searches. You get the entire page, not just the organic links.
 
-### Install via the Apify MCP configurator (use this link)
+**Consistent, non-personalized snapshots.** DuckDuckGo does not personalize results, so repeated runs return comparable SERPs, which is ideal for ranking analysis and monitoring over time.
 
-Everything below is also spelled out interactively on Apify’s MCP setup page for this Actor — **pick your app under “Client setup”** and follow that tab’s steps (each client has its own flow: connectors, JSON paths, CLI, IDE files, etc.).
+**Localized and filterable.** Target 40+ region and language combinations, set the safe-search level, and filter by date (past day, week, month, year, or a custom range).
 
-**[https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper](https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper)**
+**Predictable, pay-per-use pricing.** Billing is per run plus per page processed, with no monthly rental. You control cost directly with the page limit.
 
-On that page you get:
+**Easy to automate.** Call it from Python in a few lines, or load it as an MCP tool so assistants like Claude and Cursor can run DuckDuckGo searches for you on demand.
 
-| Section | What it’s for |
-|--------|----------------|
-| **MCP server URL** | Copy/paste connection URL for agents that ask for a server URL. |
-| **Client setup** | Tabbed instructions per client — **Claude Desktop**, **Claude.ai**, **Claude Code**, plus **Cursor**, **VS Code**, **ChatGPT**, **Codex CLI**, **Antigravity**, **Kiro**, and others under “More”. |
+## Features
 
-**Auth:** use **[OAuth](https://docs.apify.com/platform/integrations/mcp)** in the browser when offered, or your **[Apify API token](https://console.apify.com/settings/integrations)** (same kind of secret as `APIFY_API_TOKEN` in this repo). The configurator lets you choose token vs OAuth where applicable.
+### Core Capabilities
+- **Keyword search** across DuckDuckGo with full results-page extraction
+- **Localization** across 40+ region and language combinations
+- **Safe-search control** (strict, moderate, or off)
+- **Date filtering** with relative periods or a custom date range
+- **Multi-page pagination** with a configurable page cap
 
-**Canonical MCP URL for this Actor:**
+### Data Quality
+- **Structured organic results** with title, link, snippet, position, displayed link, date, and sitelinks
+- **Rich result blocks**: ads, knowledge graph, news, inline images, inline videos, related searches
+- **Per-page metadata** with result counts and pagination details
+- **Consistent JSON** shape across every query
+- **Per-page billing** so larger searches stay transparent
 
-```text
-https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper
+## Usage Examples
+
+### Basic Example
+A single-page search for one keyword. This is the cheapest way to try the API.
+```json
+{
+  "query": "machine learning",
+  "max_pages": 1
+}
 ```
 
-### What the configurator shows (examples)
+### Advanced Example
+A UK-localized search with strict safe-search, results from the past week, and two pages.
+```json
+{
+  "query": "machine learning",
+  "localization": "uk-en",
+  "safe": "strict",
+  "date_filter": "w",
+  "max_pages": 2
+}
+```
 
-These mirror [the page above](https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper); use the live tabs for full detail.
+## Input Parameters
 
-**Claude.ai**
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `query` | `string` | Yes | - | The search query. |
+| `localization` | `string` | No | `us-en` | Region and language code, e.g. `uk-en`, `fr-fr`, `de-de`, `ja-jp` (40+ supported). |
+| `safe` | `string` | No | `moderate` | Safe-search level: `strict`, `moderate`, or `off`. |
+| `date_filter` | `string` | No | (none) | `d` (past day), `w` (week), `m` (month), `y` (year), or a custom range `YYYY-MM-DD..YYYY-MM-DD`. |
+| `max_pages` | `integer` | No | `2` | Maximum pages to fetch (`0` = no limit). |
+| `output_file` | `string` | No | (none) | Optional filename to save results; auto-generated if omitted. |
 
-1. **Customize → Connectors → Browse connectors**, search for **Apify MCP server**, install, enable/update if prompted.
-2. When connecting, use your API token and enabled tools: `johnvc/DuckDuckGoSEOScraper`.
-3. In chat: **+ → Connectors →** turn on **Apify**.
-4. Alternatively: **Add custom connector** with the full MCP URL and OAuth — see the Claude.ai tab on the configurator.
+## Output Format
 
-**Claude Desktop**
+A real dataset item for the query `machine learning`. Each page of results is one item; the first result's sitelinks are trimmed here for readability.
 
-1. **Settings → Developer → Edit Config** and edit `claude_desktop_config.json`:
+```json
+{
+  "query": "machine learning",
+  "localization": "us-en",
+  "safe_search": -1,
+  "max_pages": 1,
+  "search_timestamp": "2026-05-29T09:56:11.848097",
+  "total_results_found": 11,
+  "pages_processed": 1,
+  "page_number": 1,
+  "search_metadata": {
+    "localization": "us-en",
+    "localization_name": "United States (English)",
+    "safe_search": -1,
+    "safe_search_description": "Moderate",
+    "max_pages": 1,
+    "pagination_limit_reached": true
+  },
+  "pagination_info": {
+    "total_pages": 1,
+    "max_pages_set": 1,
+    "pagination_stopped_by_limit": true,
+    "results_per_page": { "first_page": 11, "subsequent_pages": 50 }
+  },
+  "organic_results": [
+    {
+      "position": 1,
+      "title": "Machine Learning Tutorial - GeeksforGeeks",
+      "link": "https://www.geeksforgeeks.org/machine-learning/machine-learning/",
+      "date": "Apr 15, 2026",
+      "snippet": "Machine learning is a branch of Artificial Intelligence that focuses on developing models and algorithms that let computers learn from data without being explicitly programmed for every task.",
+      "favicon": "https://external-content.duckduckgo.com/ip3/www.geeksforgeeks.org.ico",
+      "sitelinks": [
+        {
+          "title": "Gradient Descent in Linear Regression",
+          "link": "https://www.geeksforgeeks.org/machine-learning/gradient-descent-in-linear-regression/"
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "title": "Machine learning - Wikipedia",
+      "link": "https://en.wikipedia.org/wiki/Machine_learning",
+      "snippet": "Machine learning (ML) is a field of study in artificial intelligence concerned with the development and study of statistical algorithms that can learn from data and generalize to unseen data.",
+      "favicon": "https://external-content.duckduckgo.com/ip3/en.wikipedia.org.ico"
+    }
+  ],
+  "ads": [],
+  "knowledge_graph": [],
+  "news_results": [],
+  "inline_images": [],
+  "inline_videos": [],
+  "related_searches": []
+}
+```
+
+---
+
+## Use as an MCP tool
+
+You can load the DuckDuckGo API as an MCP tool so assistants call it for you. The MCP server URL preloads just this one Actor:
+
+```
+https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper
+```
+
+Authenticate with OAuth in the browser when offered, or with your Apify API token (the same `APIFY_API_TOKEN` used by the Python example). Get a token at https://console.apify.com/settings/integrations and a free Apify account at https://apify.com?fpr=9n7kx3 .
+
+## Install in Claude Cowork Desktop
+
+![Install in Claude Cowork Desktop](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_claude_desktop.png)
+
+Cowork is the desktop app's automation mode. To give it the DuckDuckGo API as a tool, add the Apify MCP server as a connector.
+
+1. Open the Claude desktop app and go to **Settings → Connectors** (or **Settings → Developer → Edit Config** to edit `claude_desktop_config.json` directly).
    - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
    - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-2. Optional: add Apify API token in the UI; if you skip it, **OAuth** is used by default.
-3. Example remote config (same pattern as the configurator — `mcp-remote` + your Actor-specific URL):
+2. Add the Apify MCP server, preloaded with only this Actor:
 
 ```json
 {
@@ -110,189 +203,113 @@ These mirror [the page above](https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOS
       "args": [
         "-y",
         "mcp-remote",
-        "https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper"
+        "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper"
       ]
     }
   }
 }
 ```
 
-More help: [Claude Desktop + Apify](https://docs.apify.com/platform/integrations/claude-desktop).
+3. Restart the app. When Cowork first calls the tool, complete the OAuth prompt in your browser, or add your Apify API token in the connector settings to skip OAuth.
+4. In a Cowork chat, confirm the tool is available and ask it to run the DuckDuckGo API.
 
-**Cursor, Claude Code, VS Code, ChatGPT, Codex CLI, …**
+Download the desktop app and start a free trial: https://claude.ai/referral/uIlpa7nPLg
+More help: https://docs.apify.com/platform/integrations/claude-desktop
 
-Open the **[same configurator link](https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper)**, select the **Client setup** tab for your tool, and copy the steps there (for example Cursor `.cursor/mcp.json`, or Claude Code `claude mcp add --transport http …`). Reference docs: [Apify MCP](https://docs.apify.com/platform/integrations/mcp) · [Claude Code MCP](https://code.claude.com/docs/en/mcp).
+## Install in Claude Code
 
-### Quick reference (optional)
+![Install in Claude Code](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_claude_code.png)
 
-**Cursor** — project `.cursor/mcp.json`, `url` set to the canonical MCP URL above; add `headers.Authorization: Bearer …` if you use token auth instead of OAuth.
-
-**Claude Code**
+Claude Code is the command-line tool. Add the Actor's MCP server with one command:
 
 ```bash
 claude mcp add --transport http apify \
-  "https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper"
+  "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper"
 ```
 
-With token:
+To use a token instead of browser OAuth:
 
 ```bash
 claude mcp add --transport http apify \
-  "https://mcp.apify.com/?tools=johnvc/DuckDuckGoSEOScraper" \
+  "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper" \
   --header "Authorization: Bearer YOUR_APIFY_TOKEN"
 ```
 
-Then run `claude mcp list` or `/mcp` in-session.
+Then verify with `claude mcp list`, or run `/mcp` inside a session. Ask Claude Code to call the DuckDuckGo API.
 
-### Running this scraper from chat
+Try Claude Code free: https://claude.ai/referral/uIlpa7nPLg
+Claude Code MCP docs: https://code.claude.com/docs/en/mcp
 
-Use inputs like [Usage Examples](#usage-examples) (`query`, `localization`, `safe`, `date_filter`, `max_pages`, …). The sample script uses Actor ID `drYfVwbtEdPqbFkiC`; on MCP the Store id is `johnvc/DuckDuckGoSEOScraper`.
+## Install in Claude (website)
 
+![Install in Claude (website)](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_claude_ai.png)
 
+On claude.ai you add Apify as a connector, then enable just this Actor's tool.
 
-# 🌟 Why Choose This Scraper?
+1. Go to **Settings → Connectors → Browse connectors** and search for **Apify MCP server**. Install it (enable or update if prompted).
+2. When connecting, authenticate with your Apify API token, and enable the tool `johnvc/DuckDuckGoSEOScraper`.
+3. In any chat, open **+ → Connectors** and turn on **Apify**.
+4. Alternatively, choose **Add custom connector** and paste the full MCP URL `https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper`, using OAuth when prompted.
+5. Ask Claude to run the DuckDuckGo API.
 
-> **The most efficient, reliable, and developer-friendly DuckDuckGo search scraper**
+Open Claude on the web: https://claude.ai
 
-The DuckDuckGo Search data scraper delivers enterprise-grade performance with these advanced capabilities:
+## Install in Cursor
 
-**Performance & Reliability**: Built optimized for high-throughput scraping with intelligent rate limiting and pagination handling.
+![Install in Cursor](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_cursor.png)
 
-**Cost-Effective**: Provides consistent, reliable results with intelligent pagination management to optimize API usage.
+Cursor reads MCP servers from a project file at `.cursor/mcp.json`.
 
-**Lightning-Fast Search & Retrieval**: Search any keyword across DuckDuckGo with blazing-fast performance. Retrieve comprehensive results in seconds, not minutes, with intelligent caching and optimization.
-
-**Precision Targeting & Advanced Filtering**: Pinpoint exact search parameters with localization support, safe search filtering, and date filtering. Get precisely the search data you need, when you need it.
-
-**Rich, Structured Data Extraction**: Extract complete search information, including organic results, ads, knowledge graph, news results, inline images, inline videos, and related searches. Our advanced parsing ensures you get clean, structured data ready for immediate use.
-
-**Enterprise-Grade Configuration & Flexibility**: Built for developers and businesses who demand reliability. Highly configurable with intuitive controls, comprehensive error handling, and robust logging. Focus on your business logic while we handle the complexity of search scraping.
-
-**No Hidden Costs or Rental Fees**: We do not charge monthly rentals, our scraper operates on a pay-per-use model. Scale up or down based on your actual needs without being locked into expensive subscriptions.
-
-## 🚀 Features
-
-### Core Capabilities
-- **Advanced Search**: Support for complex queries with localization, safe search filtering, and date filtering
-- **Intelligent Pagination**: Automatic handling of DuckDuckGo search pagination with configurable limits
-- **Global Localization**: Support for 40+ international regions and languages
-- **Safe Search Control**: Configurable content filtering (Strict, Moderate, Off)
-- **Date Filtering**: Advanced time-based result filtering using predefined periods and custom date ranges
-
-### Data Quality
-- **Clean Output**: Automatic structured data metadata for clean, production-ready data
-- **Structured Results**: Consistent JSON structure across all search results
-- **Comprehensive Fields**: Organic results, ads, knowledge graph, news, inline images, inline videos, and related searches
-- **Metadata Tracking**: Page-level analytics and search performance metrics
-- **Per-Page Billing**: Results are pushed as separate dataset items for accurate billing
-
-## 📖 Usage Examples
-
-### Basic Search Example
-
-Search for "python tutorial" with default settings.
+1. In your project, create `.cursor/mcp.json`:
 
 ```json
 {
-  "query": "python tutorial"
-}
-```
-
-### Advanced Search Example
-
-Search for "machine learning" with UK localization, strict safe search, past week filtering, and pagination limits.
-
-```json
-{
-  "query": "machine learning",
-  "localization": "uk-en",
-  "safe": "strict",
-  "date_filter": "w",
-  "max_pages": 3
-}
-```
-
-## 🔍 Input References
-
-#### Input Parameters
-
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `query` | `str` | ✅ | `"python tutorial"` | Search query |
-| `localization` | `str` | ❌ | `"us-en"` | Region and language code (e.g., `"uk-en"` for UK English, `"fr-fr"` for French) |
-| `safe` | `str` | ❌ | `"moderate"` | Safe search level (`"strict"`, `"moderate"`, or `"off"`) |
-| `date_filter` | `Optional[str]` | ❌ | `None` | Date filter format (`"d"` for past day, `"w"` for past week, `"m"` for past month, `"y"` for past year, or custom `"YYYY-MM-DD..YYYY-MM-DD"`) |
-| `max_pages` | `Optional[int]` | ❌ | `2` | Maximum pages to fetch (0 = no limit) |
-| `output_file` | `Optional[str]` | ❌ | `None` | Custom output filename |
-
-## 📊 Output Format
-
-### Search Result Structure
-
-```json
-{
-  "query": "machine learning",
-  "localization": "uk-en",
-  "safe_search": 1,
-  "date_filter": "w",
-  "max_pages": 3,
-  "total_results_found": 150,
-  "pages_processed": 3,
-  "search_metadata": {
-    "localization": "uk-en",
-    "localization_name": "United Kingdom (English)",
-    "safe_search": 1,
-    "safe_search_description": "Strict",
-    "date_filter": "w",
-    "max_pages": 3,
-    "pagination_limit_reached": false
-  },
-  "pagination_info": {
-    "total_pages": 3,
-    "max_pages_set": 3,
-    "pagination_stopped_by_limit": false,
-    "results_per_page": {
-      "first_page": 30,
-      "subsequent_pages": 50
-    }
-  },
-  "organic_results": [
-    {
-      "title": "Machine Learning Tutorial",
-      "link": "https://example.com/ml-tutorial",
-      "snippet": "Learn machine learning fundamentals...",
-      "position": 1,
-      "displayed_link": "example.com",
-      "thumbnail": "https://thumbnail.url",
-      "favicon": "https://favicon.url",
-      "date": "2024-01-15",
-      "rich_snippet": "Rich snippet content...",
-      "sitelinks": [...]
-    }
-  ],
-  "ads": [...],
-  "knowledge_graph": [...],
-  "news_results": [...],
-  "inline_images": [...],
-  "inline_videos": [...],
-  "related_searches": [...],
-  "results_by_page": {
-    "1": {
-      "organic_results": [...],
-      "ads": [...],
-      "knowledge_graph": [...],
-      "news_results": [...],
-      "inline_images": [...],
-      "inline_videos": [...],
-      "related_searches": [...]
+  "mcpServers": {
+    "apify": {
+      "url": "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper"
     }
   }
 }
 ```
 
+2. If you prefer token auth over browser OAuth, add a header:
 
-[**Made with ❤️**](https://apify.com/johnvc?fpr=9n7kx3)
+```json
+{
+  "mcpServers": {
+    "apify": {
+      "url": "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper",
+      "headers": { "Authorization": "Bearer YOUR_APIFY_TOKEN" }
+    }
+  }
+}
+```
 
-*Transform your search automation with the most reliable and efficient DuckDuckGo search scraper on the market.*
+3. Open **Cursor → Settings → MCP** and confirm the **apify** server is connected (green dot).
+4. In Composer or Chat, ask Cursor to call the DuckDuckGo API.
+
+New to Cursor? Get it here: https://cursor.com/referral?code=XQP4VBLI3NNX
+
+## Install in ChatGPT
+
+![Install in ChatGPT](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_ChatGPT.png)
+
+ChatGPT connects to the Apify MCP server through Developer mode (available on ChatGPT Pro, Plus, Business, Enterprise, and Education plans).
+
+1. Click your profile icon, then go to **Settings > Apps**. If you do not see a **Create app** button, open **Advanced settings** and enable **Developer mode**.
+2. Click **Create app** and fill out the form:
+   - **Name:** Apify
+   - **MCP Server URL:** `https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper`
+   - **Authentication:** OAuth
+3. Click **Create** and authorize the connection with Apify.
+4. To use the app in a conversation, click **+** in the chat, choose **Developer mode**, and select **Apify**.
+
+More help: https://docs.apify.com/platform/integrations/mcp
+
+---
+
+[**Made with care**](https://apify.com/johnvc?fpr=9n7kx3)
+
+*Use the DuckDuckGo API to power your search and SEO workflows with reliable, structured results.*
 
 Last Updated: 2026.05.29

@@ -1,32 +1,52 @@
 """
-DuckDuckGo Search Scraper: A Quick Start Example
-See more at: https://apify.com/johnvc/apifyduckduckgo?fpr=9n7kx3
+DuckDuckGo API: A Quick Start Example
+See more at: https://apify.com/johnvc/DuckDuckGoSEOScraper?fpr=9n7kx3
+Input schema: https://apify.com/johnvc/DuckDuckGoSEOScraper/input-schema?fpr=9n7kx3
 
-This script demonstrates how to use the DuckDuckGo Search Scraper Actor
-to search DuckDuckGo and retrieve structured search results.
+This script shows how to call the DuckDuckGo API on Apify from Python and read its
+structured JSON output. It exercises several input parameters so you can see what
+is configurable, while keeping the run small so your first call stays cheap.
+
+Get your free Apify API key at: https://apify.com?fpr=9n7kx3
 """
 
 import os
-from typing import Dict, Any, Optional
 from dotenv import load_dotenv
 from apify_client import ApifyClient
 
 load_dotenv()
 
-# Initialize the ApifyClient with your API token
+# Initialize the Apify client with your API token (read from .env)
 client = ApifyClient(os.getenv("APIFY_API_TOKEN"))
 
-# Prepare the Actor input:  Search the query, set the localization to US English, set the safe search to moderate, and set the maximum number of pages to 2.
+# Build the Actor input.
+# Inputs are kept small (one query, max_pages=1) to keep this first run
+# inexpensive. Raise these once you have your own API key and know your budget.
 run_input = {
-    "query": "scrape duckduckgo with python tutorial",
-    "localization": "us-en",
-    "safe": "moderate",
-    "max_pages": 2,
+    "query": "machine learning",   # the only required field
+    "localization": "us-en",        # 40+ region-language codes, e.g. uk-en, fr-fr, de-de
+    "safe": "moderate",             # strict, moderate, or off
+    # "date_filter": "w",           # d, w, m, y, or a custom YYYY-MM-DD..YYYY-MM-DD range
+    "max_pages": 1,                 # pages to fetch; kept at 1 to keep the run cheap
 }
 
 # Run the Actor and wait for it to finish
-run = client.actor("drYfVwbtEdPqbFkiC").call(run_input=run_input)
+run = client.actor("johnvc/DuckDuckGoSEOScraper").call(run_input=run_input)
+if run is None:
+    raise SystemExit("The Actor run did not return a result.")
 
-# Fetch and print Actor results from the run's dataset (if there are any)
-for item in client.dataset(run["defaultDatasetId"]).iterate_items():
-    print(item)
+# Read structured results from the run's default dataset (one item per page)
+items = list(client.dataset(run.default_dataset_id).iterate_items())
+print(f"Returned {len(items)} item(s).\n")
+
+# Show a few key fields from each page of results.
+for item in items:
+    print(
+        f"Query: {item.get('query')}  |  "
+        f"Page: {item.get('page_number')}  |  "
+        f"Results found: {item.get('total_results_found')}"
+    )
+    for result in (item.get("organic_results") or [])[:5]:
+        print(f"  {result.get('position')}. {result.get('title')}")
+        print(f"     {result.get('link')}")
+    print()
