@@ -1,7 +1,7 @@
 """
 DuckDuckGo API: A Quick Start Example
-See more at: https://apify.com/johnvc/DuckDuckGoSEOScraper?fpr=9n7kx3
-Input schema: https://apify.com/johnvc/DuckDuckGoSEOScraper/input-schema?fpr=9n7kx3
+See more at: https://apify.com/johnvc/DuckDuckGo-Scraper-for-serp-rankings?fpr=9n7kx3
+Input schema: https://apify.com/johnvc/DuckDuckGo-Scraper-for-serp-rankings/input-schema?fpr=9n7kx3
 
 This script shows how to call the DuckDuckGo API on Apify from Python and read its
 structured JSON output. It exercises several input parameters so you can see what
@@ -31,7 +31,7 @@ run_input = {
 }
 
 # Run the Actor and wait for it to finish
-run = client.actor("johnvc/DuckDuckGoSEOScraper").call(run_input=run_input)
+run = client.actor("johnvc/DuckDuckGo-Scraper-for-serp-rankings").call(run_input=run_input)
 if run is None:
     raise SystemExit("The Actor run did not return a result.")
 

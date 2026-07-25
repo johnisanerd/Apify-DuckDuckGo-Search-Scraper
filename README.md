@@ -2,8 +2,8 @@
 
 > The most efficient, reliable, and developer-friendly way to use the DuckDuckGo API.
 
-**Actor page:** [apify.com/johnvc/DuckDuckGoSEOScraper](https://apify.com/johnvc/DuckDuckGoSEOScraper?fpr=9n7kx3)
-**Input schema:** [apify.com/johnvc/DuckDuckGoSEOScraper/input-schema](https://apify.com/johnvc/DuckDuckGoSEOScraper/input-schema?fpr=9n7kx3)
+**Actor page:** [apify.com/johnvc/DuckDuckGo-Scraper-for-serp-rankings](https://apify.com/johnvc/DuckDuckGo-Scraper-for-serp-rankings?fpr=9n7kx3)
+**Input schema:** [apify.com/johnvc/DuckDuckGo-Scraper-for-serp-rankings/input-schema](https://apify.com/johnvc/DuckDuckGo-Scraper-for-serp-rankings/input-schema?fpr=9n7kx3)
 
 The DuckDuckGo API runs a DuckDuckGo search for any query and returns clean, structured JSON. Each page of results comes back as one item with organic listings (title, link, snippet, position, sitelinks), ads, knowledge graph panels, news results, inline images, inline videos, and related searches, plus per-page metadata. It supports 40+ region and language combinations, safe-search levels, date filtering, and automatic pagination. Because DuckDuckGo does not personalize results, the output is consistent across runs.
 
@@ -179,7 +179,7 @@ A real dataset item for the query `machine learning`. Each page of results is on
 You can load the DuckDuckGo API as an MCP tool so assistants call it for you. The MCP server URL preloads just this one Actor:
 
 ```
-https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper
+https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGo-Scraper-for-serp-rankings
 ```
 
 Authenticate with OAuth in the browser when offered, or with your Apify API token (the same `APIFY_API_TOKEN` used by the Python example). Get a token at https://console.apify.com/settings/integrations and a free Apify account at https://apify.com?fpr=9n7kx3 .
@@ -203,7 +203,7 @@ Cowork is the desktop app's automation mode. To give it the DuckDuckGo API as a 
       "args": [
         "-y",
         "mcp-remote",
-        "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper"
+        "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGo-Scraper-for-serp-rankings"
       ]
     }
   }
@@ -224,14 +224,14 @@ Claude Code is the command-line tool. Add the Actor's MCP server with one comman
 
 ```bash
 claude mcp add --transport http apify \
-  "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper"
+  "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGo-Scraper-for-serp-rankings"
 ```
 
 To use a token instead of browser OAuth:
 
 ```bash
 claude mcp add --transport http apify \
-  "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper" \
+  "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGo-Scraper-for-serp-rankings" \
   --header "Authorization: Bearer YOUR_APIFY_TOKEN"
 ```
 
@@ -247,9 +247,9 @@ Claude Code MCP docs: https://code.claude.com/docs/en/mcp
 On claude.ai you add Apify as a connector, then enable just this Actor's tool.
 
 1. Go to **Settings → Connectors → Browse connectors** and search for **Apify MCP server**. Install it (enable or update if prompted).
-2. When connecting, authenticate with your Apify API token, and enable the tool `johnvc/DuckDuckGoSEOScraper`.
+2. When connecting, authenticate with your Apify API token, and enable the tool `johnvc/DuckDuckGo-Scraper-for-serp-rankings`.
 3. In any chat, open **+ → Connectors** and turn on **Apify**.
-4. Alternatively, choose **Add custom connector** and paste the full MCP URL `https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper`, using OAuth when prompted.
+4. Alternatively, choose **Add custom connector** and paste the full MCP URL `https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGo-Scraper-for-serp-rankings`, using OAuth when prompted.
 5. Ask Claude to run the DuckDuckGo API.
 
 Open Claude on the web: https://claude.ai/referral/uIlpa7nPLg
@@ -266,7 +266,7 @@ Cursor reads MCP servers from a project file at `.cursor/mcp.json`.
 {
   "mcpServers": {
     "apify": {
-      "url": "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper"
+      "url": "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGo-Scraper-for-serp-rankings"
     }
   }
 }
@@ -278,7 +278,7 @@ Cursor reads MCP servers from a project file at `.cursor/mcp.json`.
 {
   "mcpServers": {
     "apify": {
-      "url": "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper",
+      "url": "https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGo-Scraper-for-serp-rankings",
       "headers": { "Authorization": "Bearer YOUR_APIFY_TOKEN" }
     }
   }
@@ -299,7 +299,7 @@ ChatGPT connects to the Apify MCP server through Developer mode (available on Ch
 1. Click your profile icon, then go to **Settings > Apps**. If you do not see a **Create app** button, open **Advanced settings** and enable **Developer mode**.
 2. Click **Create app** and fill out the form:
    - **Name:** Apify
-   - **MCP Server URL:** `https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGoSEOScraper`
+   - **MCP Server URL:** `https://mcp.apify.com/?tools=actors,docs,johnvc/DuckDuckGo-Scraper-for-serp-rankings`
    - **Authentication:** OAuth
 3. Click **Create** and authorize the connection with Apify.
 4. To use the app in a conversation, click **+** in the chat, choose **Developer mode**, and select **Apify**.
