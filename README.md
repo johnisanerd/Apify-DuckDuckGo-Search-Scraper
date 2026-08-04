@@ -312,4 +312,4 @@ More help: https://docs.apify.com/platform/integrations/mcp
 
 *Use the DuckDuckGo API to power your search and SEO workflows with reliable, structured results.*
 
-Last Updated: 2026.08.03
+Last Updated: 2026.08.04
